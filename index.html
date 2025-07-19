@@ -245,6 +245,9 @@
                     key.classList.remove("present");
                     key.classList.add("correct");
                   }
+                  else {
+                    key.classList.add("correct");
+                  }
                 }
                 else if (solution.includes(guess[i])) {
                   tile.classList.add("present");

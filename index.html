@@ -173,13 +173,13 @@
         words = text.split("\n").map(word => word.trim().toUpperCase());
       });
     let solutions = [];
-    let word = "";
+    let solution = "";
     fetch("solutions.txt")
       .then(response => response.text())
       .then(text => {
         solutions = text.split("\n").map(word => word.trim().toUpperCase());
-        word = solutions[Math.floor(Math.random() * solutions.length)];
-        console.log("target word:", word);
+        solution = solutions[Math.floor(Math.random() * solutions.length)];
+        console.log("target word:", solution);
       });
     
     let row = 0;

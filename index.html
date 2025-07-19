@@ -207,6 +207,11 @@
             }
             guess = guess.toUpperCase();
 
+            if (words.length() === 0) {
+              alert("Game still loading, please wait...);
+              return;
+            }
+            
             if (words.includes(guess)) {
               row++;
               col = 0;

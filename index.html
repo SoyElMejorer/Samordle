@@ -166,6 +166,45 @@
   </div>
   
   <script>
+    let row = 0;
+    let col = 0;
+    const rows = document.querySelectorAll(".row");
+    const keys = document.querySelectorAll(".key");
+    
+    keys.forEach(key => {
+      key.addEventListener("click", () => {
+        if (key.textContent === "⌫") {
+          if (col > 0) {
+            col--;
+            const tile = rows[row].children[col];
+            tile.textContent = "";
+          }
+          return;
+        }
+        
+        if (key.textContent === "ENTER") {
+          if (col === 5) {
+            
+            
+            row++;
+            col = 0;
+          }
+          return;
+        }
+        
+        if (col < 5) {
+          const tile = rows[row].children[col];
+          tile.textContent = key.textContent;
+          col++;
+        console.log("Key pressed:", key.textContent);
+        
+        }
+      
+    
+      });
+    });
+
+                  
     
   </script>
 </body>

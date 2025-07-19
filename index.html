@@ -172,6 +172,15 @@
       .then(text => {
         words = text.split("\n").map(word => word.trim().toUpperCase());
       });
+    let solutions = [];
+    fetch("solutions.txt")
+      .then(response => response.text())
+      .then(text => {
+        solutions = text.split("\n").map(word => word.trim().toUpperCase());
+        word = solutions[Math.floor(Math.random() * solutions.length)];
+        console.log("target word:", targetWord);
+      });
+    
     let row = 0;
     let col = 0;
     const rows = document.querySelectorAll(".row");

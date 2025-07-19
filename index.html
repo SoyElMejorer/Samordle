@@ -46,6 +46,16 @@
       background-color: #121213;
     }
 
+    .tile.correct {
+      background-color: green;
+    }
+    .tile.present {
+      background-color: gold;
+    }
+    .tile.absent {
+      background-color: #3a3a3c;
+    }
+
     #keyboard {
       margin-top: 30px;
       display: flex;
@@ -216,6 +226,17 @@
             }
             
             if (words.includes(guess)) {
+              for (let i = 0; i<5; i++) {
+                const tile = rows[row].children[i];
+                if (guess[i] === solution[i]) {
+                  tile.classList.add("correct");
+                }
+                else if (solution.includes(guess[i]) {
+                  tile.classList.add("present");
+                }
+                else {
+                  tile.classList.add("absent");
+                }
               row++;
               col = 0;
             }

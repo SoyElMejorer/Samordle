@@ -87,6 +87,16 @@
       min-width: 50px;
     }
 
+    .key.correct {
+      background-color: green;
+    }
+    .key.present {
+      background-color: gold;
+    }
+    .key.absent {
+      background-color: #3a3a3c;
+    }
+
     
   </style>
 </head>
@@ -228,14 +238,18 @@
             if (words.includes(guess)) {
               for (let i = 0; i<5; i++) {
                 const tile = rows[row].children[i];
+                const key = Array.from(keys).find(k => k.textContent === guess[i]);
                 if (guess[i] === solution[i]) {
                   tile.classList.add("correct");
+                  key.classList.add("correct");
                 }
                 else if (solution.includes(guess[i])) {
                   tile.classList.add("present");
+                  key.classList.add("present");
                 }
                 else {
                   tile.classList.add("absent");
+                  key.classList.add("absnet");
                 }
             }
             row++;

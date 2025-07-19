@@ -206,9 +206,9 @@
               guess += rows[row].children[i].textContent.trim();
             }
             guess = guess.toUpperCase();
-
+            console.log("guess:", guess);
             if (words.length === 0) {
-              alert("Game still loading, please wait...);
+              alert("Game still loading, please wait...");
               return;
             }
             

@@ -241,7 +241,10 @@
                 const key = Array.from(keys).find(k => k.textContent === guess[i]);
                 if (guess[i] === solution[i]) {
                   tile.classList.add("correct");
-                  key.classList.add("correct");
+                  if (key.classList.contains("present") {
+                    key.classList.remove("present");
+                    key.classList.add("correct");
+                  
                 }
                 else if (solution.includes(guess[i])) {
                   tile.classList.add("present");

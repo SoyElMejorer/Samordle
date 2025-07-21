@@ -251,6 +251,7 @@
                 const tile = rows[row].children[i];
                 const letter = guess[i];
                 const key = Array.from(keys).find(k => k.textContent === guess[i]);
+                console.log(key.textContent);
                 if (letter === solution[i]) {
                   tile.classList.add("correct");
                   key.classList.add("correct");

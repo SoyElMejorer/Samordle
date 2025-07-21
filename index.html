@@ -226,46 +226,27 @@
   </div>
   
   <script>
-    let words = [];
-    fetch("words.txt")
-      .then(response => response.text())
-      .then(text => {
-        words = text.split("\n").map(word => word.trim().toUpperCase());
-      });
-    let solutions = [];
-    let solution = "";
-    fetch("solutions.txt")
-      .then(response => response.text())
-      .then(text => {
-        solutions = text.split("\n").map(word => word.trim().toUpperCase());
-        solution = solutions[Math.floor(Math.random() * solutions.length)];
-        console.log("target word:", solution);
-        const letterCounts = {};
-        for (let i = 0; i < 5; i++) {
-          const letter = solution[i];
-          letterCounts[letter] = (letterCounts[letter] || 0) + 1;
-        }
-      });
-    
-    let row = 0;
-    let col = 0;
-    
-    const rows = document.querySelectorAll(".row");
-    const keys = document.querySelectorAll(".key");
-    
-    keys.forEach(key => {
-      key.addEventListener("click", () => {
-        if (key.textContent === "⌫") {
-          if (col > 0) {
-            col--;
-            const tile = rows[row].children[col];
-            tile.textContent = "";
-          }
-          return;
-        }
+
+    function letterInput(letter) {
+      if (col < 5) {
+        const tile = rows[row].children[col];
+        tile.textContent = letter;
+        col++;
+        console.log("Key pressed:", letter);
         
-        if (key.textContent === "ENTER") {
-          let guess = "";
+      }
+    }
+
+    function handleBackspace() {
+      if (col > 0) {
+        col--;
+        const tile = rows[row].children[col];
+        tile.textContent = "";
+      }
+    }
+
+    function handleEnter() {
+      let guess = "";
           if (col === 5) {
             for (let i = 0; i<5; i++) {
               guess += rows[row].children[i].textContent.trim();
@@ -343,22 +324,69 @@
               alert("Thats not a word bruh");
             }
           }
+    }
+  
+
+
+    
+    let words = [];
+    fetch("words.txt")
+      .then(response => response.text())
+      .then(text => {
+        words = text.split("\n").map(word => word.trim().toUpperCase());
+      });
+    let solutions = [];
+    let solution = "";
+    fetch("solutions.txt")
+      .then(response => response.text())
+      .then(text => {
+        solutions = text.split("\n").map(word => word.trim().toUpperCase());
+        solution = solutions[Math.floor(Math.random() * solutions.length)];
+        console.log("target word:", solution);
+        const letterCounts = {};
+        for (let i = 0; i < 5; i++) {
+          const letter = solution[i];
+          letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+        }
+      });
+    
+    let row = 0;
+    let col = 0;
+    
+    const rows = document.querySelectorAll(".row");
+    const keys = document.querySelectorAll(".key");
+    
+    keys.forEach(key => {
+      key.addEventListener("click", () => {
+        if (key.textContent === "⌫") {
+          handleBackspace();
+          return;
+        }
+        
+        if (key.textContent === "ENTER") {
+          handleEnter();
           return;
           }
+        letterInput(key.textContent);
           
-        document.getElementById("play-again").addEventListener("click", () => {
-        location.reload(); // easiest way to reset everything
-        });
-        if (col < 5) {
-          const tile = rows[row].children[col];
-          tile.textContent = key.textContent;
-          col++;
-        console.log("Key pressed:", key.textContent);
         
-        }
-      
+        });
       });
-    });            
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toUpperCase();
+
+      if (key === "BACKSPACE") {
+        eent.preventDefault();
+        handleBackspace();
+      } else if (key === "ENTER") {
+        handleEnter();
+      } else if (/^[A-Z]$/.test(key)) {  // Only letters A-Z
+        letterInput(key);
+      }
+    });
+        document.getElementById("play-again").addEventListener("click", () => {
+          location.reload();
+      });            
     
   </script>
   

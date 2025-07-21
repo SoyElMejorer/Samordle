@@ -256,6 +256,9 @@
                   if (key.classList.contains("present")) {
                     key.classList.remove("present");
                   }
+                  if (key.classList.contains("absent")) {
+                    key.classList.remove("absent");
+                  }
                   key.classList.add("correct");
                   letterCounts[letter]--;
                 }
@@ -275,7 +278,7 @@
                   }
                 } else {
                   tile.classList.add("absent");
-                  if (!key.classList.contains("present")) {
+                  if (!key.classList.contains("present") && !key.classList.contains("correct")) {
                     key.classList.add("absent");
                   }
                 }

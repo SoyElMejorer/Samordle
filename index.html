@@ -266,7 +266,7 @@
   
                 if (solution.includes(letter) && letterCounts[letter] > 0) {
                   tile.classList.add("present");
-                  if !(key.classList.contains("correct")) {
+                  if (!key.classList.contains("correct")) {
                     key.classList.add("present");
                   letterCounts[letter]--;
                 } else {

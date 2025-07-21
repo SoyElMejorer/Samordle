@@ -253,8 +253,8 @@
                 const key = Array.from(keys).find(k => k.textContent === guess[i]);
                 if (letter === solution[i]) {
                   tile.classList.add("correct");
-                  if (key.classList.contains("absent")) {
-                    key.classList.remove("absent");
+                  if (key.classList.contains("present")) {
+                    key.classList.remove("present");
                   }
                   key.classList.add("correct");
                   letterCounts[letter]--;

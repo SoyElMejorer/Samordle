@@ -207,6 +207,13 @@
     </div>
   </div>
   
+    <div id="win-screen" class="hidden">
+    <div class="win-box">
+      <h2>🎉 You Win! 🎉</h2>
+      <button id="play-again">Play Again</button>
+     </div>
+  </div>
+  
   <script>
     let words = [];
     fetch("words.txt")
@@ -328,7 +335,9 @@
           return;
           }
           
-        
+        document.getElementById("play-again").addEventListener("click", () => {
+        location.reload(); // easiest way to reset everything
+        });
         if (col < 5) {
           const tile = rows[row].children[col];
           tile.textContent = key.textContent;
@@ -341,13 +350,6 @@
     });            
     
   </script>
-  
-  <div id="win-screen" class="hidden">
-  <div class="win-box">
-    <h2>🎉 You Win! 🎉</h2>
-    <button id="play-again">Play Again</button>
-  </div>
-</div>
   
 </body>
 </html>

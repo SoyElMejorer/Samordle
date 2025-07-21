@@ -376,9 +376,10 @@
       const key = event.key.toUpperCase();
 
       if (key === "BACKSPACE") {
-        eent.preventDefault();
+        event.preventDefault();
         handleBackspace();
       } else if (key === "ENTER") {
+        event.preventDefault();
         handleEnter();
       } else if (/^[A-Z]$/.test(key)) {  // Only letters A-Z
         letterInput(key);

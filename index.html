@@ -200,6 +200,11 @@
         solutions = text.split("\n").map(word => word.trim().toUpperCase());
         solution = solutions[Math.floor(Math.random() * solutions.length)];
         console.log("target word:", solution);
+        const letterCounts = {};
+        for (let i = 0; i < 5; i++) {
+          const letter = solution[i];
+          letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+        }
       });
     
     let row = 0;
@@ -236,28 +241,39 @@
             }
             
             if (words.includes(guess)) {
-              for (let i = 0; i<5; i++) {
+              const letterCounts = {};
+              for (let i = 0; i < 5; i++) {
+                const letter = solution[i];
+                letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+              }
+
+              for (let i = 0; i < 5; i++) {
                 const tile = rows[row].children[i];
+                const letter = guess[i];
                 const key = Array.from(keys).find(k => k.textContent === guess[i]);
-                if (guess[i] === solution[i]) {
+                if (letter === solution[i]) {
                   tile.classList.add("correct");
-                  if (key.classList.contains("present")) {
-                    key.classList.remove("present");
-                    key.classList.add("correct");
-                  }
-                  else {
-                    key.classList.add("correct");
-                  }
+                  key.classList.add("correct");
+                  letterCounts[letter]--;
                 }
-                else if (solution.includes(guess[i])) {
+              }
+
+              for (let i = 0; i < 5; i++) {
+                const tile = rows[row].children[i];
+                const letter = guess[i];
+  
+                if (tile.classList.contains("correct")) continue; // already green
+  
+                if (solution.includes(letter) && letterCounts[letter] > 0) {
                   tile.classList.add("present");
-                  key.classList.add("present");
-                }
-                else {
+                  if !(key.classList.contains("correct")) {
+                    key.classList.add("present");
+                  letterCounts[letter]--;
+                } else {
                   tile.classList.add("absent");
                   key.classList.add("absent");
                 }
-            }
+              }
             row++;
             col = 0;
             }
@@ -277,11 +293,8 @@
         
         }
       
-    
       });
-    });
-
-                  
+    });            
     
   </script>
 </body>
